@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { gql } from 'apollo-boost'
-// import { graphql } from 'react-apollo'
-// import { useQuery } from '@apollo/react-hooks'
-import { Query } from 'react-apollo';
 
 const getPostsContent = gql`
 {
-  post {
+  posts {
     postContent
   }
 }
@@ -14,15 +11,23 @@ const getPostsContent = gql`
 
 // class Test extends Component {
 export default class Test extends Component {
+  constructor(props) {
+    super(props)
+    const {client} = this.props
+
+    this.postContent = ''
+
+    client.query({
+      query: getPostsContent
+    }).then(res => {
+      console.log(res.data.posts[0].postContent)
+      this.postContent = res.data.posts[0].postContent
+    })
+  }
   render() {
     return (
-      <Query query={getPostsContent}>
-        {({ loading, error, data }) => {
-          if (loading) return 'Loading...';
-          if (error) return `Error! ${error.message}`;
-          return data
-        }}
-      </Query>
+      <div dangerouslySetInnerHTML={{__html: this.postContent}}>
+      </div>
     )
   }
 }
