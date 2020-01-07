@@ -1,3 +1,10 @@
+This is a test setup for a basic react frontend that uses graphQL queries.
+
+Dependencies include:  
+react-apollo - ApolloProvider  
+apollo-boost - ApolloClient and gql  
+apollo-cache-inmemory - InMemoryCache  
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
